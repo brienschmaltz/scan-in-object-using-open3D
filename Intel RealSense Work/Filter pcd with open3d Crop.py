@@ -11,7 +11,7 @@ side2_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy 
 top_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\top_view.ply") 
 
 #For reusability 
-point_cloud = front_pcd_filtered
+point_cloud = side_pcd
 
 #For Dr. Reiman demonstration
 #point_cloud = side2_pcd

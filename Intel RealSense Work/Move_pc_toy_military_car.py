@@ -3,10 +3,10 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-front_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_front_pcd_final.ply")
-back_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_back_pcd.ply")
-side_pcd= o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side_pcd.ply")
-side2_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side2_pcd.ply")
+front_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_front_pcd_final.ply")
+back_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_back_pcd.plyy")
+side_pcd= o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side_pcd.ply")
+side2_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side2_pcd.ply")
 top_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\top_view.ply") 
 
 #front_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\360 degree.ply")
