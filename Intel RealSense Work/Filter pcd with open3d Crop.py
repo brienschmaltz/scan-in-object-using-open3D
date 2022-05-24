@@ -16,7 +16,7 @@ point_cloud = side_pcd
 #For Dr. Reiman demonstration
 #point_cloud = side2_pcd
 
-print("Filter point cloud with regression line.")
+print("Filter point cloud with open3d crop.")
 
 bounding_box = point_cloud.get_axis_aligned_bounding_box()
 bounding_box.color = (1,0,0)
@@ -56,6 +56,14 @@ o3d.visualization.draw(
 print('After bounding box crop')
 o3d.visualization.draw(
          [cropped])
+
+
+#Crop example with JSON file. Isn't useful, although if you could modifiy the json points it would.
+#vol = o3d.visualization.read_selection_polygon_volume(r"data\boundingbox.json")
+#crop = vol.crop_point_cloud(side_pcd)
+#crop.paint_uniform_color([1, 0.706, 1])
+#3d.visualization.draw(
+#         [side_pcd, crop])
 
 #Save
 #o3d.io.write_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_front_pcd_final.ply", cropped)
