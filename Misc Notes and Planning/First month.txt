@@ -1,0 +1,111 @@
+# Week 2 - 3 Feedback adjustment.
+
+# ✅  Understand read_pickle and to_pickle 
+      #https://pandas.pydata.org/docs/reference/api/pandas.read_pickle.html
+      #https://www.geeksforgeeks.org/dataframe-read_pickle-method-in-pandas/
+        
+# ✅ Create new variables in the dataset: Heading, altitude, radar range, radar field of view angles left right up and down.
+
+
+#     Go over Ipywidget tutorials. https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20Basics.html
+
+#     Review plotly express for mapping - EG:  px.scattermapbox. https://plotly.com/python/maps/
+
+#     Figure out computations for - Given heading, lat, long and speed and time elapsed determine next lat long 
+ 
+#     Every minute. Start with initial position and heading at 0 seconds , append new lat longs at next time stamp. 
+
+#     AEW - goes in circles. Boolean radar? If something enters, AI will have location information. Parameter turn at certain distance. So after so many nautical miles it will turn heading and adjust. 
+
+#     Radar system. Plane start with inital Radar POV, lets say 120 degrees. Look up general radar range. Lets say 300 feet.
+
+#     Missle - Color coded. Missle range. 
+
+#      AI - Red/Blue 
+
+#  !  Data generation - We are given a inital position, then a new lat long, speed, heading, time frame. How do create 
+                        # a new lat long and speed based on the previous measuremnts. SO one line of the data set 
+                        # will look like this [Object 1], [lat=0] [long=0 [heading=0] [timeframe = 0]
+                        # next will look like [Object 1], [lat=1] [long=1 [heading=25] [timeframe = 1]
+                        # next will look like [Object 1], [lat=2] [long=2 [heading=25.2] [timeframe = 2]
+                        # Some sort of loop that generates new lat long based off prev information, then updates the dataset.
+                        
+                        # Look into this! 
+
+
+      #https://stackoverflow.com/questions/7222382/get-lat-long-given-current-point-distance-and-bearing
+    
+      # Bearing - is the angle in degrees (clockwise) between North and the direction to the destination or nav aid.
+      # Heading - is the direction the aircraft is pointing. 
+      # Lat -  are angles measured with the center of the earth as an origin
+      # Long -  are angles measured with the center of the earth as an origin
+      # Speed -  the time rate at which an object is moving along a path. S = d/t
+      # Time elasped - From origin?
+ 
+#------------------------------
+
+# Extra notes for myself            (WEEK 1-5)
+
+#-------------------------------
+
+pdSeries = [1, 3 , 5]
+#This is a one-dimensional array holding data of any type.
+print(pdSeries)
+
+#Load a comma separated file (CSV file) into a DataFrame:
+#df = pd.read_csv('data.csv')
+#print(df.to_string())
+
+#Load the JSON file into a DataFrame:
+df = pd.read_json('data.json')
+print(df.to_string())
+#The head() method returns the headers and a specified number of rows starting from the top.
+#Eg: first 10 rows of the Dataframe
+df = pd.read_csv('data.csv')
+
+print(df.head(10))
+#Note: if the number of rows is not specified, the head() method will return the top 5 rows.
+# tail() returns last rows. Essentially .head just from the bottom.
+
+#prints info (very specific) about dataframe/  
+#nulls can be bad, remove if possible to "clean data"
+print(df.info()) 
+
+#Cleaning data.
+import pandas as pd
+df = pd.read_csv('dirtydata.csv')
+#Remove rows with empty cells
+new_df = df.dropna()
+
+print(new_df.to_string())
+
+
+#Add index (or timeframe in our case) to the dataFrame
+myvar = pd.DataFrame(radarList, index = ["type1", "type2", "type3", "type4", "type5"])
+
+#Tip: use to_string() to print the entire DataFrame.
+print(myvar)
+
+#Side Notes:
+
+#How to print rows, pd.loc[#]
+#print("2nd Row:" , myvar.loc[2])
+
+#How to print rows/at specified index
+print(myvar.loc["type2"])
+
+#Pickle and Unpickling. 
+#Bascially used to create a file with the dataset froze in the current state. Unpickling 
+
+d = {'Test' : ["Example1","Example2"],
+    'dataforTest': ["Name", "Job Title"]
+    }
+
+# using to_pickle function to form file 
+# with name 'pickle_file' 
+pd.to_pickle(data,'./pickle_file.pkl')
+  
+# unpickled the data by using the
+# pd.read_pickle method
+unpickled_data = pd.read_pickle("./pickle_file.pkl")
+print(unpickled_data)
