@@ -1,10 +1,8 @@
 import open3d as o3d
 import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 front_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_front_pcd_final.ply")
-back_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_back_pcd.plyy")
+back_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_back_pcd.ply")
 side_pcd= o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side_pcd.ply")
 side2_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side2_pcd.ply")
 top_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\top_view.ply") 
@@ -14,6 +12,10 @@ top_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Tr
 # side_pcd= o3d.io.read_point_cloud(r"data\Toy Truck PLY files\90 degree.ply")
 # side2_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\270 degree.ply")
 # top_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\top_view.ply") 
+
+o3d.visualization.draw_geometries(
+         [side_pcd, side2_pcd, back_pcd, front_pcd])
+
 
 #make new array of the xyz cords of each point cloud
 side_pcd_as_array= np.asarray(side_pcd.points)
@@ -49,8 +51,17 @@ axis_aligned_bounding_box.color = (1, 0, 0)
 oriented_bounding_box = side_pcd.get_oriented_bounding_box()
 oriented_bounding_box.color = (0, 1, 0)
 print("Displaying axis_aligned_bounding_box in red and oriented bounding box in green ...")
-o3d.visualization.draw(
+o3d.visualization.draw_geometries(
          [side_pcd, side2_pcd, back_pcd, front_pcd, axis_aligned_bounding_box])
+
+
+combined_pcd = o3d.geometry.PointCloud()
+combined_pcd += side_pcd
+combined_pcd += side2_pcd
+combined_pcd += back_pcd
+combined_pcd += front_pcd
+o3d.io.write_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\combined_filtered_toy_car.ply", combined_pcd)
+
 
 
 
