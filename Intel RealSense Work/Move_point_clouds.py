@@ -21,10 +21,6 @@ print(colors[0])
 #print(side_pcd_as_array[:,2].mean())
 #side_pcd_as_array.transpose()
 
-#x_change = 0.3
-#with np.nditer(side_pcd_as_array, op_flags=['readwrite']) as it:
-#   for x in it:
-#       x[...] = x + x_change
 
 matrix_transform = side_pcd.get_rotation_matrix_from_xyz((0 ,0.25 * np.pi,0))
 side_pcd = side_pcd.rotate(matrix_transform, center=(0.05719749449452742,-0.07283343846119142,-0.2521047743007881))

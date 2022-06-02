@@ -6,7 +6,7 @@ import numpy as np
 #Here is an example with toy car
 
 def main():
-    source = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\150 degree.ply")
+    source = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\150 degree.ply")
     target = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\New names\270 pcd.ply")
 
     # draw initial alignment

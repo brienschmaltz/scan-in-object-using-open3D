@@ -7,15 +7,8 @@ side_pcd= o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Tr
 side2_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side2_pcd.ply")
 top_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\top_view.ply") 
 
-#front_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\360 degree.ply")
-# back_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\180 degree.ply")
-# side_pcd= o3d.io.read_point_cloud(r"data\Toy Truck PLY files\90 degree.ply")
-# side2_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\270 degree.ply")
-# top_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\top_view.ply") 
-
 o3d.visualization.draw_geometries(
          [side_pcd, side2_pcd, back_pcd, front_pcd])
-
 
 #make new array of the xyz cords of each point cloud
 side_pcd_as_array= np.asarray(side_pcd.points)
@@ -23,7 +16,6 @@ side_pcd_as_color_array= np.asarray(side_pcd.colors)
 side2_pcd_as_array= np.asarray(side2_pcd.points)
 back_pcd_as_array= np.asarray(back_pcd.points)
 
-#Not orienting ICP vs orienting it manually. 
 
 #90 ply rotation (back side)
 matrix_transform = back_pcd.get_rotation_matrix_from_xyz((0 ,0.5* np.pi,0))
