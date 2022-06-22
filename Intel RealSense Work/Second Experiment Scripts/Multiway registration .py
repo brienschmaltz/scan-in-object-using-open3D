@@ -6,16 +6,18 @@ import numpy as np
 def main():
     pcds = []
     voxel_size = 0.001
-    num_of_point_clouds = 12
+    num_of_point_clouds = 3
     file_num = 30
     #go through each point cloud file (taken at different angles in degrees) and append to array
     for i in range(num_of_point_clouds):
-        ply = f"Intel RealSense Work\Second Experiment Scripts\filtered_data\_{file_num}_pcd_filtered.ply"
+        ply = rf"Intel RealSense Work\Second Experiment Scripts\filtered_data\_{file_num}_pcd_filtered.ply" 
         #ply = rf"data\Toy Truck PLY files\Filtered\Regression Filter\New names\{file_num} pcd.ply"
         file_num+=30
         i+=i
 
         pcd = o3d.io.read_point_cloud(ply) 
+        #These normals are required to do multiway registration
+        pcd.estimate_normals()
         pcd_down = pcd.voxel_down_sample(voxel_size=voxel_size)
         pcds.append(pcd_down)
 

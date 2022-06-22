@@ -5,25 +5,28 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def main():
-    
-    front_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\360 degree.ply")
-    back_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\180 degree.ply")
-    side_pcd= o3d.io.read_point_cloud(r"data\Toy Truck PLY files\90 degree.ply")
-    side2_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\270 degree.ply")
-    top_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\top_view.ply") 
+    _30_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\30 degree.ply")
+    _60_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\60 degree.ply")
+    _90_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\90 degree.ply")
+    _150_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\150 degree.ply")
+    _180_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\180 degree.ply")
+    _210_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\210 degree.ply")
+    _240_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\240 degree.ply")
+    _270_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\270 degree.ply")
+    _300_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\300 degree.ply")
+    _330_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\330 degree.ply")
+    _360_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\360 degree.ply")
 
     #For resusability sake
-    point_cloud = back_pcd
+    point_cloud = _330_pcd
 
     #make new array of the xyz cords of each point cloud
     side_pcd_as_array= np.asarray(point_cloud.points)
     side_pcd_as_color_array= np.asarray(point_cloud.colors)
-    #colors = np.asarray(back_pcd.colors)
-    #print(colors[0])
 
     print("Filter point cloud with regression line.")
     print('Before Regression Filter')
-    o3d.visualization.draw(
+    o3d.visualization.draw_geometries(
             [point_cloud])
 
     #Linear Regression
@@ -67,15 +70,11 @@ def main():
      
     #Display Filtered PCD 
     print('After Regression Filter')
-    o3d.visualization.draw(
+    o3d.visualization.draw_geometries(
             [filtered_side_pcd])
 
-    o3d.io.write_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_back_pcd.ply", filtered_side_pcd)
+    o3d.io.write_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\New names\330 pcd.ply", filtered_side_pcd)
 
-#Finish later. Make this applicable to any PCD
-def write_pcd_to_system(filtered_pcd):
-    print("Writing Filtered PCD basef off regression line to system")
-    #o3d.io.write_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_pcd.ply", pcd)
 
 if __name__ == "__main__":
     main()

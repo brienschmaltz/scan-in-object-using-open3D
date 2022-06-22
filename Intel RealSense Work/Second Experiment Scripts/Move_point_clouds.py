@@ -51,7 +51,7 @@ _180_temp = _180_temp.rotate(matrix_transform_180_, center=(0,0,0))
 _180_temp = _180_temp.translate((0.3,0,-0.8))
 
 o3d.visualization.draw_geometries(
-         [_30_pcd,_180_temp])
+         [_90_pcd,_180_temp])
 
 
 # #180 ply rotation (front side)

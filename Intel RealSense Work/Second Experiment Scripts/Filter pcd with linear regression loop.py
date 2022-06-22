@@ -30,11 +30,8 @@ def main():
         #make new array of the xyz cords of each point cloud
         pcd_as_array= np.asarray(point_cloud.points)
         pcd_as_color_array= np.asarray(point_cloud.colors)
-        #colors = np.asarray(back_pcd.colors)
-        #print(colors[0])
 
-        #Before regression filtercl
-
+        #Before regression filter
         #o3d.visualization.draw_geometries(
         #        [point_cloud])
 
@@ -80,18 +77,15 @@ def main():
         #Display Filtered PCD 
         #o3d.visualization.draw_geometries(
         #        [filtered_pcd])
-        current_pcd = "_" + str(i) + "_pcd_filtered.ply"
-        dir_name = r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_210_pcd_filtered.ply"
+        
+        current_pcd = "\_" + str(i) + "_pcd_filtered.ply"
+        dir_name = r"Intel RealSense Work\Second Experiment Scripts\filtered_data"
         full_path = os.path.join(dir_name + current_pcd)
         print("Wrote: ", current_pcd, "to \n"  , full_path)
         i+=30
 
-        #o3d.io.write_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_210_pcd_filtered.ply", filtered_pcd)
+        o3d.io.write_point_cloud(full_path, filtered_pcd)
 
-#Finish later. Make this applicable to any PCD
-def write_pcd_to_system(filtered_pcd):
-    print("Writing Filtered PCD basef off regression line to system")
-    #o3d.io.write_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_pcd.ply", pcd)
 
 if __name__ == "__main__":
     main()

@@ -5,17 +5,15 @@ import numpy as np
 
 def main():
     pcds = []
-    voxel_size = 0.001
+    voxel_size = 0.005
     num_of_point_clouds = 3
-    file_num = 30
+    file_num = 90
     #go through each point cloud file (taken at different angles in degrees) and append to array
     for i in range(num_of_point_clouds):
-        if(file_num == 120):
-           file_num = 150
-        ply = f"data\Toy Truck PLY files\{file_num} degree.ply"
+        ply = fr"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\New names\{file_num} pcd.ply"
         #ply = rf"data\Toy Truck PLY files\Filtered\Regression Filter\New names\{file_num} pcd.ply"
-        file_num+=30
-        i+=i
+        file_num+=90
+        
 
         pcd = o3d.io.read_point_cloud(ply) 
         pcd_down = pcd.voxel_down_sample(voxel_size=voxel_size)
