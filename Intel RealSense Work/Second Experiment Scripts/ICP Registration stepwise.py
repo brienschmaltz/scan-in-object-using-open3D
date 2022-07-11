@@ -7,7 +7,7 @@ def main():
 
     #Try ICP on filtered combined side
     #Seems to only work with manual alignment
-    source_2 = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\210 degree.ply")
+    source_2 = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\Regression Filter\New names\30 pcd.ply")
     target_2 = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\combined_filtered_toy_car.ply")
     
     source_down_2, source_fpfh_2 = preprocess_point_cloud(source_2, voxel_size)
@@ -18,40 +18,35 @@ def main():
 
     #-----------------------
 
-    print("Gathering files...")
-    voxel_size = 0.005 # means mm for this dataset
-    source, target, source_down, target_down, source_fpfh, target_fpfh = prepare_dataset(voxel_size)
-    result_ransac = execute_global_registration(source_down, target_down, source_fpfh, target_fpfh, voxel_size)
-    
-    #print(result_ransac)
-    draw_registration_result(source_down, target_down, result_ransac.transformation)
-
-    #Gather other point clouds and append together for futher processing    
-    #front_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_front_pcd_final.ply")
-    #back_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_back_pcd.ply")
-    #side_pcd= o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side_pcd.ply")
-    #side2_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\Filtered\Regression Filter\filtered_side2_pcd.ply")
-    #top_pcd = o3d.io.read_point_cloud(r"data\Toy Truck PLY files\top_view.ply") 
+    # print("Gathering files...")
+    # voxel_size = 0.005 # means mm for this dataset
+    # source, target, source_down, target_down, source_fpfh, target_fpfh = prepare_dataset(voxel_size)
+    # result_ransac = execute_global_registration(source_down, target_down, source_fpfh, target_fpfh, voxel_size)
     
 
-    #Apply transform to source (stationary pcd)
-    source_down.transform(result_ransac.transformation)
 
-    #Combine pcd's
-    combined_pcd = source_down
-    #Target side
-    combined_pcd += target_down
+    # #print(result_ransac)
+    # draw_registration_result(source_down, target_down, result_ransac.transformation)
 
-    # Manual application of ICP to combined source.
-    source_1 = combined_pcd
-    target_1 = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\180 degree.ply")
 
-    source_down_1, source_fpfh_1 = preprocess_point_cloud(source_1, voxel_size)
-    target_down_1, target_fpfh_1 = preprocess_point_cloud(target_1, voxel_size)
-    result_ransac_1 = execute_global_registration(source_down_1, target_down_1, source_fpfh_1, target_fpfh_1, voxel_size)
+    # #Apply transform to source (stationary pcd)
+    # source_down.transform(result_ransac.transformation)
 
-    draw_registration_result(source_1, target_1, result_ransac_1.transformation)
-    source_down_1.transform(result_ransac_1.transformation)
+    # #Combine pcd's
+    # combined_pcd = source_down
+    # #Target side
+    # combined_pcd += target_down
+
+    # # Manual application of ICP to combined source.
+    # source_1 = combined_pcd
+    # target_1 = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\180 degree.ply")
+
+    # source_down_1, source_fpfh_1 = preprocess_point_cloud(source_1, voxel_size)
+    # target_down_1, target_fpfh_1 = preprocess_point_cloud(target_1, voxel_size)
+    # result_ransac_1 = execute_global_registration(source_down_1, target_down_1, source_fpfh_1, target_fpfh_1, voxel_size)
+
+    # draw_registration_result(source_1, target_1, result_ransac_1.transformation)
+    # source_down_1.transform(result_ransac_1.transformation)
     
 
 def draw_registration_result(source, target, transformation):
@@ -101,7 +96,7 @@ def execute_global_registration(source_down, target_down, source_fpfh, target_fp
         o3d.pipelines.registration.TransformationEstimationPointToPoint(False),
         3, [o3d.pipelines.registration.CorrespondenceCheckerBasedOnEdgeLength(0.9),
             o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(distance_threshold)], 
-            o3d.pipelines.registration.RANSACConvergenceCriteria(1000000, 0.999))
+            o3d.pipelines.registration.RANSACConvergenceCriteria(4000000, 500))
     return result
 #RANSACConvergenceCriteria. It defines the maximum number of RANSAC iterations and the maximum number of validation steps. 
 # The larger these two numbers are, the more accurate the result is, but also the more time the algorithm takes.

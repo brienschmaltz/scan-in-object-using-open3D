@@ -20,11 +20,15 @@ def main():
         _330_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_330_pcd_filtered.ply")
         _360_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_360_pcd_filtered.ply")
 
+        #First experiment combined pcd
         combined_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\combined_filtered_toy_car.ply")
 
+        #Second experiment combined pcd (this one is dark and not as good as the first)
+        combined_pcd_2 = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\combined_filtered_toy_car.ply")
+       
         #For resusability sake
         point_cloud = _330_pcd
-        point_cloud2 = combined_pcd
+        point_cloud2 = combined_pcd_2
 
         print('Before Filter')
         #o3d.visualization.draw_geometries(
@@ -53,10 +57,11 @@ def main():
         print("-> Radius filtering in progress ...")
 
         # These two figures below took some tweaking to make the fliter effective
-        # I increased the num_points from 20 to 500 and the radius from 0.05 to 0.1
+        # I increased the num_points from 20 to 500 and the radius from 0.05 to 0.1 (for the first pcd combined file, for the second 
+        # I went to 700-900 for the best outlier removal)
         # radius filtering appears to not get rid of of point clouds on the face like the statistical filter
 
-        num_points = 550 # The minimum number of points in the neighborhood ball , Points below this value are noise points 
+        num_points = 800 # The minimum number of points in the neighborhood ball , Points below this value are noise points 
         radius = 0.05 # Neighborhood radius size 
         # Perform radius filtering , Returns the filtered point cloud sor_pcd And the corresponding index ind
         sor_pcd, ind = point_cloud2.remove_radius_outlier(num_points, radius)
@@ -73,7 +78,8 @@ def main():
 
         o3d.visualization.draw_geometries([sor_pcd])
 
-        #o3d.io.write_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\filtered_combined_pcd.ply", sor_pcd)
+        #Write to system below
+        #o3d.io.write_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\final_combined_second_toy_car.ply", sor_pcd)
 
 if __name__ == "__main__":
     main()

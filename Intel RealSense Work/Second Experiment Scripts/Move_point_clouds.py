@@ -2,18 +2,18 @@ import copy
 import open3d as o3d
 import numpy as np
 
-_30_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\30 degree.ply")
-_60_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\60 degree.ply")
-_90_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\90 degree.ply")
-_120_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\120 degree.ply")
-_150_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\150 degree.ply")
-_180_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\180 degree.ply")
-_210_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\210 degree.ply")
-_240_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\240 degree.ply")
-_270_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\270 degree.ply")
-_300_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\300 degree.ply")
-_330_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\330 degree.ply")
-_360_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\360 degree.ply")
+_30_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_30_pcd_filtered.ply")
+_60_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_60_pcd_filtered.ply")
+_90_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_90_pcd_filtered.ply")
+_120_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_120_pcd_filtered.ply")
+_150_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_150_pcd_filtered.ply")
+_180_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_180_pcd_filtered.ply")
+_210_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_210_pcd_filtered.ply")
+_240_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_240_pcd_filtered.ply")
+_270_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_270_pcd_filtered.ply")
+_300_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_300_pcd_filtered.ply")
+_330_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_330_pcd_filtered.ply")
+_360_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\_360_pcd_filtered.ply")
 
 #o3d.visualization.draw_geometries(
 #         [_30_pcd, _60_pcd, _90_pcd, _120_pcd,_150_pcd,_180_pcd,_210_pcd,_240_pcd,_270_pcd,_300_pcd,_330_pcd, _360_pcd])
@@ -27,64 +27,42 @@ _360_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Secon
 #rotate 30-90
 
 #Always copy before rotates and translations it will affect the pcd forever and can cause weird issues running over and over.
-# _60_temp = copy.deepcopy(_60_pcd)
-# matrix_transform_60 = _30_pcd.get_rotation_matrix_from_xyz((0 ,np.pi/6,0))
-# _60_temp = _60_temp.rotate(matrix_transform_60, center=(0,0,0))
-# _60_temp = _60_temp.translate((0.37,0,-0.1))
-
-# o3d.visualization.draw_geometries(
-#          [_30_pcd,_60_temp])
-
-# _90_temp = copy.deepcopy(_90_pcd)
-# matrix_transform_90 = _30_pcd.get_rotation_matrix_from_xyz((0 ,np.pi/3,0))
-# _90_temp = _90_temp.rotate(matrix_transform_90, center=(0,0,0))
-# _90_temp = _90_temp.translate((0.40,0,-0.2))
-
-# o3d.visualization.draw_geometries(
-#          [_30_pcd,_90_temp])
 
 
 
 _180_temp = copy.deepcopy(_180_pcd)
-matrix_transform_180_ = _30_pcd.get_rotation_matrix_from_xyz((0 ,4.8* np.pi,0))
+matrix_transform_180_ = _90_pcd.get_rotation_matrix_from_xyz((0 ,np.pi/2,0))
 _180_temp = _180_temp.rotate(matrix_transform_180_, center=(0,0,0))
-_180_temp = _180_temp.translate((0.3,0,-0.8))
+_180_temp = _180_temp.translate((0.49,0,-0.44))
+
+
+_270_temp = copy.deepcopy(_270_pcd)
+matrix_transform_270 = _90_pcd.get_rotation_matrix_from_xyz((0 ,np.pi,0))
+_270_temp = _270_temp.rotate(matrix_transform_270, center=(0,0,0))
+_270_temp = _270_temp.translate((0.04,-0.02,-0.94))
+
+_360_temp = copy.deepcopy(_360_pcd)
+matrix_transform_360 = _90_pcd.get_rotation_matrix_from_xyz((0 , (3* np.pi)/2,0))
+_360_temp = _360_temp.rotate(matrix_transform_360, center=(0,0,0))
+_360_temp = _360_temp.translate((-0.42,-0.02,-0.5))
+
+#Visualize
 
 o3d.visualization.draw_geometries(
-         [_90_pcd,_180_temp])
+         [_90_pcd,_180_temp,_270_temp,_360_temp])
 
 
-# #180 ply rotation (front side)
-# matrix_transform_1 = front_pcd.get_rotation_matrix_from_xyz((0 ,-0.5* np.pi,0))
-# front_pcd = front_pcd.rotate(matrix_transform_1, center=(side_pcd_as_array[:,0].mean(),side_pcd_as_array[:,1].mean(),side_pcd_as_array[:,2].mean()))
-# front_pcd = front_pcd.translate((-0.055,-0.02,-0.001))
+#add all transformed pcd's
 
-# #270 ply rotation (left side)
-# matrix_transform_2 = side2_pcd.get_rotation_matrix_from_xyz((0 ,1* np.pi,0))
-# side2_pcd = side2_pcd.rotate(matrix_transform_2, center=(side_pcd_as_array[:,0].mean(),side_pcd_as_array[:,1].mean(),side_pcd_as_array[:,2].mean()))
-# side2_pcd = side2_pcd.translate((-0.015,-0.02,0.004))
+combined_pcd = o3d.geometry.PointCloud()
+combined_pcd += _90_pcd
+combined_pcd += _180_temp
+combined_pcd += _270_temp
+combined_pcd += _360_temp
 
-# #top rotation
-# matrix_transform_3 = side2_pcd.get_rotation_matrix_from_xyz((-0.6* np.pi ,0,0))
-# top_pcd = top_pcd.rotate(matrix_transform_3, center=(side_pcd_as_array[:,0].mean(),side_pcd_as_array[:,1].mean(),side_pcd_as_array[:,2].mean()))
-# top_pcd = top_pcd.translate((0.01,0.12,0.1))
+#Write to system below
 
-# #Bounding box and final display
-# axis_aligned_bounding_box = side_pcd.get_axis_aligned_bounding_box()
-# axis_aligned_bounding_box.color = (1, 0, 0)
-# oriented_bounding_box = side_pcd.get_oriented_bounding_box()
-# oriented_bounding_box.color = (0, 1, 0)
-# print("Displaying axis_aligned_bounding_box in red and oriented bounding box in green ...")
-# o3d.visualization.draw_geometries(
-#          [side_pcd, side2_pcd, back_pcd, front_pcd, axis_aligned_bounding_box])
-
-
-# combined_pcd = o3d.geometry.PointCloud()
-# combined_pcd += side_pcd
-# combined_pcd += side2_pcd
-# combined_pcd += back_pcd
-# combined_pcd += front_pcd
-# o3d.io.write_point_cloud(r"Intel RealSense Work\point cloud data\Toy Truck PLY files\Filtered\combined_filtered_toy_car.ply", combined_pcd)
+#o3d.io.write_point_cloud(r"Intel RealSense Work\Second Experiment Scripts\filtered_data\combined_filtered_toy_car.ply", combined_pcd)
 
 
 
@@ -93,7 +71,7 @@ o3d.visualization.draw_geometries(
 
 
 
-# MISC ---------------------------------------
+# MISC --------------------------------------- IGNORE
 
 #How to add to first column of numpy array.
 #back_pcd_as_array[:,0]+=0.3e

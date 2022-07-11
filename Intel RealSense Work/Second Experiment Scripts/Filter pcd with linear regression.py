@@ -21,9 +21,10 @@ def main():
     _360_pcd = o3d.io.read_point_cloud(r"Intel RealSense Work\point cloud data\Second experiment Toy Truck PLY files\360 degree.ply")
 
 
-    #For resusability sake
-    point_cloud = _30_pcd
 
+    #For resusability sake
+    point_cloud = _360_pcd
+    
     #make new array of the xyz cords of each point cloud
     pcd_as_array= np.asarray(point_cloud.points)
     pcd_as_color_array= np.asarray(point_cloud.colors)
